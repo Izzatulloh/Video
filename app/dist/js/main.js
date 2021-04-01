@@ -27,7 +27,6 @@ let volumeUpDown = document.querySelector('.fa-volume-up')
 let time = document.querySelector('.video__time')
 let fullScreen = document.querySelector('.fullScreen')
 
-
 playerIcon.addEventListener('click', ()=>{
     video__time()
     player()
@@ -43,13 +42,11 @@ play.addEventListener('click', () => {
 })
 stop.addEventListener('click', ()=>{
     stopVideo()
-    
 })
 volume.addEventListener('input', ()=>{
-    let vol = volume.value
+    let vol = volume.value;
     video.volume = vol / 100
-    console.log(vol); 
-
+    save = volume.value
 })
 video.addEventListener('timeupdate', ()=>{
     progressUpadate()
@@ -81,7 +78,6 @@ function progressUpadate() {
     let d = video.duration
     let c= video.currentTime
     progress.value = 100 * c / d
-    // console.log(progress.value);
 }
 
 function player(){
@@ -98,23 +94,21 @@ function player(){
 }
 let save = volume.value
 let saveVol = video.volume
+
 function volumeUp(){
-    let vol = volume.value
+    let vol = volume.value;
      video.volume = vol /100
     if( volumeUpDown.classList.contains('fa-volume-up')) {
         volumeUpDown.classList.add('fa-volume-mute');
         volumeUpDown.classList.remove('fa-volume-up');
-        
-        video.volume = 0    
+        video.volume = 0
         volume.value = 0
-        
-        
     }
     else {
         volumeUpDown.classList.add('fa-volume-up');
         volumeUpDown.classList.remove('fa-volume-mute');
-        volume.value = save
         video.volume = saveVol
+        volume.value = save
     } 
 }
 function playVideo() {
@@ -139,7 +133,6 @@ function speedDownVideo() {
     }
     play.classList.remove('fa-play');
     play.classList.add('fa-pause');
-    // console.log(video.playbackRate);
 }
 function speedUpVideo() {
     video.play()
@@ -150,7 +143,6 @@ function speedUpVideo() {
     }
     play.classList.remove('fa-play');
     play.classList.add('fa-pause');
-    // console.log(video.playbackRate);
 }
 
 function videoRewind() {
@@ -158,18 +150,14 @@ function videoRewind() {
     let offset = event.offsetX;
     progress.value = 100 * offset / width
     video.currentTime = video.duration * (offset/width)
-    // console.log(offset);    
     console.log(width);    
 }
 video.addEventListener('loadedmetadata', ()=>{
     video__time()
-    
 })
 video.addEventListener('timeupdate', ()=>{
     video__time()
-    
 })
-
 function fixed(number) {
     return number < 10 ? `0${number}` : `${number}` 
 }
@@ -177,12 +165,7 @@ function fixed(number) {
 function video__time() {
     const duration = Number(video.duration.toFixed())
     const current = Number(video.currentTime.toFixed())
-    // console.log(duration);
-    // console.log(current);
     let timer = `${fixed(Math.floor(current / 60))}:${fixed(Math.floor(current % 60))}`
     let dur = `${Math.floor(duration / 60)}:${Math.floor(duration % 60)}`
     time.innerHTML = `${timer} / ${dur}`
-
-    // console.log(timer);    
 }
-
