@@ -69,6 +69,10 @@
     }
 }
 @media(max-width:960px){
+    .header{
+        clip-path: none;
+        background-attachment:  scroll;
+    }
     .footer{
         flex-direction: column;
         align-items: center;
